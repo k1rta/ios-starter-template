@@ -121,7 +121,7 @@ Go to **About** (top right) → **⚙️ Settings** → Add topics
 Your README already has badges. Ensure GitHub Actions workflow matches:
 
 ```markdown
-[![CI](https://github.com/YOUR_USERNAME/free-ios-app-creation-template/workflows/CI/badge.svg)](https://github.com/YOUR_USERNAME/free-ios-app-creation-template/actions)
+[![CI](https://github.com/k1rta/free-ios-app-creation-template/workflows/CI/badge.svg)](https://github.com/k1rta/free-ios-app-creation-template/actions)
 ```
 
 Update `YOUR_USERNAME` with your actual GitHub username.

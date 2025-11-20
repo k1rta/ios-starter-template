@@ -1,0 +1,11 @@
+node_modules
+.expo
+.expo-shared
+coverage
+dist
+android
+ios
+metro-cache
+package-lock.json
+*.log
+.github/workflows/*.yml
