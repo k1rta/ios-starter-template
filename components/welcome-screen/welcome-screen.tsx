@@ -52,6 +52,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
   useEffect(() => {
     let isMounted = true;
+    const animations: Animated.CompositeAnimation[] = [];
 
     // Smooth entrance with easing
     Animated.parallel([
@@ -83,6 +84,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         }),
       ]),
     );
+    animations.push(pulseLoop);
     pulseLoop.start();
 
     // Breathing glow effect
@@ -100,6 +102,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         }),
       ]),
     );
+    animations.push(glowLoop);
     glowLoop.start();
 
     // Animate particles across entire screen
@@ -107,7 +110,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
       const animateParticle = () => {
         if (!isMounted) return;
 
-        Animated.parallel([
+        const particleAnim = Animated.parallel([
           Animated.sequence([
             Animated.timing(particle.x, {
               toValue: (Math.random() - 0.5) * 400, // -200 to 200
@@ -146,16 +149,19 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               }),
             ]),
           ),
-        ]).start(() => animateParticle());
+        ]);
+        animations.push(particleAnim);
+        particleAnim.start(() => {
+          if (isMounted) animateParticle();
+        });
       };
       animateParticle();
     });
 
-    // Cleanup on unmount
+    // Cleanup on unmount - stop ALL animations
     return () => {
       isMounted = false;
-      pulseLoop.stop();
-      glowLoop.stop();
+      animations.forEach((anim) => anim.stop());
     };
   }, [fadeAnim, slideAnim, pulseAnim, glowAnim, particles]);
 
