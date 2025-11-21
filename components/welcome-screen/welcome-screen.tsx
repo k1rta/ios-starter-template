@@ -51,7 +51,6 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   ).current;
 
   useEffect(() => {
-    let isMounted = true;
     const animations: Animated.CompositeAnimation[] = [];
 
     // Reset all animated values to initial state
@@ -116,62 +115,64 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
     animations.push(glowLoop);
     glowLoop.start();
 
-    // Animate particles across entire screen
+    // Animate particles across entire screen with continuous loops
     particles.forEach((particle, index) => {
-      const animateParticle = () => {
-        if (!isMounted) return;
+      // X-axis movement loop
+      const xLoop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(particle.x, {
+            toValue: (Math.random() - 0.5) * 400,
+            duration: 3000 + index * 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(particle.x, {
+            toValue: (Math.random() - 0.5) * 400,
+            duration: 3000 + index * 1000,
+            useNativeDriver: true,
+          }),
+        ]),
+      );
 
-        const particleAnim = Animated.parallel([
-          Animated.sequence([
-            Animated.timing(particle.x, {
-              toValue: (Math.random() - 0.5) * 400, // -200 to 200
-              duration: 3000 + index * 1000,
-              useNativeDriver: true,
-            }),
-            Animated.timing(particle.x, {
-              toValue: (Math.random() - 0.5) * 400,
-              duration: 3000 + index * 1000,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(particle.y, {
-              toValue: (Math.random() - 0.5) * 800, // -400 to 400
-              duration: 4000 + index * 800,
-              useNativeDriver: true,
-            }),
-            Animated.timing(particle.y, {
-              toValue: (Math.random() - 0.5) * 800,
-              duration: 4000 + index * 800,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.loop(
-            Animated.sequence([
-              Animated.timing(particle.opacity, {
-                toValue: 0.5,
-                duration: 2000,
-                useNativeDriver: true,
-              }),
-              Animated.timing(particle.opacity, {
-                toValue: 0.1,
-                duration: 2000,
-                useNativeDriver: true,
-              }),
-            ]),
-          ),
-        ]);
-        animations.push(particleAnim);
-        particleAnim.start(() => {
-          if (isMounted) animateParticle();
-        });
-      };
-      animateParticle();
+      // Y-axis movement loop
+      const yLoop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(particle.y, {
+            toValue: (Math.random() - 0.5) * 800,
+            duration: 4000 + index * 800,
+            useNativeDriver: true,
+          }),
+          Animated.timing(particle.y, {
+            toValue: (Math.random() - 0.5) * 800,
+            duration: 4000 + index * 800,
+            useNativeDriver: true,
+          }),
+        ]),
+      );
+
+      // Opacity loop
+      const opacityLoop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(particle.opacity, {
+            toValue: 0.5,
+            duration: 2000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(particle.opacity, {
+            toValue: 0.1,
+            duration: 2000,
+            useNativeDriver: true,
+          }),
+        ]),
+      );
+
+      animations.push(xLoop, yLoop, opacityLoop);
+      xLoop.start();
+      yLoop.start();
+      opacityLoop.start();
     });
 
     // Cleanup on unmount - stop ALL animations
     return () => {
-      isMounted = false;
       animations.forEach((anim) => anim.stop());
     };
   }, [fadeAnim, slideAnim, pulseAnim, glowAnim, particles]);
