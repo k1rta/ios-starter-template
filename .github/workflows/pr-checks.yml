@@ -35,14 +35,26 @@ jobs:
         run: |
           echo "Bundle size check - implement with bundlesize or similar"
       
-      - name: Comment PR
+      - name: Comment PR Success
         uses: actions/github-script@v7
-        if: always()
+        if: success()
         with:
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '✅ PR checks completed successfully!'
+              body: '✅ PR validation checks passed successfully!'
+            })
+      
+      - name: Comment PR Failure
+        uses: actions/github-script@v7
+        if: failure()
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ PR validation checks failed. Please check the workflow logs for details.'
             })
