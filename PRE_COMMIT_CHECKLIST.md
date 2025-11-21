@@ -2,6 +2,8 @@
 
 Run through this checklist before committing code to ensure quality and consistency.
 
+> **🎉 Husky is configured!** These checks run automatically when you `git commit`.
+
 ---
 
 ## 🔍 Code Quality Checks

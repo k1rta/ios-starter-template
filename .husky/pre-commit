@@ -1,0 +1,28 @@
+echo "🔍 Running pre-commit checks..."
+echo ""
+
+# Run linter
+echo "1️⃣ Checking ESLint..."
+npm run lint || { echo "❌ Linting failed. Fix errors before committing."; exit 1; }
+echo "✅ ESLint passed"
+echo ""
+
+# Check formatting
+echo "2️⃣ Checking Prettier formatting..."
+npx prettier --check . || { echo "❌ Formatting issues found. Run 'npx prettier --write .' to fix."; exit 1; }
+echo "✅ Prettier passed"
+echo ""
+
+# Run tests
+echo "3️⃣ Running tests..."
+npm test || { echo "❌ Tests failed. Fix failing tests before committing."; exit 1; }
+echo "✅ Tests passed"
+echo ""
+
+# TypeScript check
+echo "4️⃣ Checking TypeScript..."
+npx tsc --noEmit || { echo "❌ TypeScript errors found. Fix type errors before committing."; exit 1; }
+echo "✅ TypeScript passed"
+echo ""
+
+echo "✅ All pre-commit checks passed! 🎉"

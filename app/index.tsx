@@ -5,7 +5,8 @@ import { WelcomeScreen } from '@/components/welcome-screen/welcome-screen';
 import { colors } from '@/constants/colors';
 
 const REPO_URL = 'https://github.com/k1rta/ios-starter-template';
-const DEPLOYMENT_URL = 'https://github.com/k1rta/ios-starter-template/blob/main/DEPLOYMENT_GUIDE.md';
+const DEPLOYMENT_URL =
+  'https://github.com/k1rta/ios-starter-template/blob/main/DEPLOYMENT_GUIDE.md';
 
 const HomeScreen: React.FC = () => {
   const router = useRouter();
