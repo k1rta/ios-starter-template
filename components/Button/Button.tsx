@@ -60,7 +60,9 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.7}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'primary' ? colors.background : colors.accent} />
+        <ActivityIndicator
+          color={variant === 'primary' ? colors.background : colors.primary}
+        />
       ) : (
         <Text style={textStyles}>{title}</Text>
       )}
@@ -76,8 +78,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button_primary: {
-    backgroundColor: colors.accent,
-    shadowColor: colors.accent,
+    backgroundColor: colors.primary,
+    shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   button_secondary: {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: colors.accent,
+    borderColor: colors.primary,
   },
   button_tertiary: {
     backgroundColor: colors.surface,
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     color: colors.background,
   },
   text_secondary: {
-    color: colors.accent,
+    color: colors.primary,
   },
   text_tertiary: {
     color: colors.textPrimary,

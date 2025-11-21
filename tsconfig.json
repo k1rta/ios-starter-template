@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -22,25 +19,13 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "types": [
-      "jest",
-      "react",
-      "react-native"
-    ],
+    "types": ["jest", "react", "react-native"],
     "baseUrl": "./",
     "paths": {
-      "@/app/*": [
-        "app/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/utils/*": [
-        "utils/*"
-      ],
-      "@/constants/*": [
-        "constants/*"
-      ]
+      "@/app/*": ["app/*"],
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"],
+      "@/constants/*": ["constants/*"]
     }
   },
   "include": [
@@ -52,10 +37,6 @@
     "*.ts",
     "*.tsx"
   ],
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "jest.config.js"
-  ],
+  "exclude": ["node_modules", "babel.config.js", "jest.config.js"],
   "extends": "expo/tsconfig.base"
 }

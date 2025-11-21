@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   glowing: {
-    shadowColor: colors.accent,
+    shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 16,
