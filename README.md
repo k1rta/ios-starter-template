@@ -32,7 +32,7 @@
 - **Expo Router** file-based navigation
 - **Font Awesome** solid icons
 - **ESLint + Prettier** configured
-- **32 unit tests** - all passing with 35%+ coverage
+- **32 unit tests** - all passing with 36% coverage
 - **Husky** pre-commit hooks
 
 ---
@@ -100,14 +100,14 @@ npm test -- --watch
 npm test -- --coverage
 ```
 
-**Current Status**: ✅ **32/32 tests passing** | Coverage: 35%+
+**Current Status**: ✅ **32/32 tests passing** | Coverage: 36%
 
 Tests cover:
 
-- Color constants and spacing utilities
-- Welcome screen component (all props and rendering)
-- Home screen component
-- Coverage enforcement: PRs must maintain 35%+ coverage
+- Color constants and spacing utilities (100% coverage)
+- Welcome screen component (100% coverage)
+- Home screen component (37.5% coverage)
+- Coverage enforcement: PRs must maintain minimum thresholds
 
 ---
 
