@@ -164,9 +164,8 @@ router.push('/new-page');
 
 ## 📚 Documentation
 
+- [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - Deploy without App Store
 - [TEST_REPORT.md](./TEST_REPORT.md) - Testing results
-- [GITHUB_SETUP.md](./GITHUB_SETUP.md) - Repository setup
-- [**tests**/README.md](./__tests__/README.md) - Testing guide
 
 ---
 
