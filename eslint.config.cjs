@@ -1,8 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { FlatCompat } = require('@eslint/eslintrc');
-const compat = new FlatCompat();
+const path = require('path');
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: require('@eslint/js').configs.recommended,
+});
 
 module.exports = [
+  {
+    ignores: ['**/*.config.js', '**/*.config.cjs', 'metro.config.js', 'node_modules/', 'dist/', '.expo/', '__mocks__/'],
+  },
   {
     files: ['**/*.{ts,tsx}'],
   },
@@ -42,6 +50,10 @@ module.exports = [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
+      'react-native/no-color-literals': 'off',
+      'react-native/sort-styles': 'off',
+      'react-native/no-inline-styles': 'off',
+      'react-native/no-unused-styles': 'off',
     },
   },
 ];

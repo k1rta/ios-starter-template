@@ -36,8 +36,11 @@ export default function StatsScreen() {
   ).current;
 
   useEffect(() => {
+    let isMounted = true;
+    const animations: Animated.CompositeAnimation[] = [];
+
     // Entrance animations
-    Animated.parallel([
+    const introAnim = Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 1200,
@@ -49,12 +52,15 @@ export default function StatsScreen() {
         friction: 7,
         useNativeDriver: true,
       }),
-    ]).start();
+    ]);
+    animations.push(introAnim);
+    introAnim.start();
 
     // Particle animations
     particles.forEach((particle, index) => {
       const animateParticle = () => {
-        Animated.parallel([
+        if (!isMounted) return;
+        const anim = Animated.parallel([
           Animated.sequence([
             Animated.timing(particle.x, {
               toValue: (Math.random() - 0.5) * 400,
@@ -93,13 +99,23 @@ export default function StatsScreen() {
               }),
             ])
           ),
-        ]).start(() => animateParticle());
+        ]);
+        animations.push(anim);
+        anim.start(() => {
+          if (isMounted) animateParticle();
+        });
       };
       animateParticle();
     });
 
     // Fetch GitHub stats
     fetchGitHubStats();
+
+    return () => {
+      isMounted = false;
+      animations.forEach(anim => anim.stop());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchGitHubStats = async () => {
