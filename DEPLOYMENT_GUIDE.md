@@ -165,11 +165,11 @@ npx eas build --platform ios --profile preview
 
 ## Cost Comparison
 
-| Method | Cost | Users | Updates |
-|--------|------|-------|---------|
-| Expo Go (tunnel) | Free | Unlimited | Live |
-| EAS Update | Free | Unlimited | Instant |
-| EAS Internal Build | Free* | 100 devices | Manual |
+| Method             | Cost   | Users       | Updates |
+| ------------------ | ------ | ----------- | ------- |
+| Expo Go (tunnel)   | Free   | Unlimited   | Live    |
+| EAS Update         | Free   | Unlimited   | Instant |
+| EAS Internal Build | Free\* | 100 devices | Manual  |
 
 \* Free tier: 30 builds/month
 
