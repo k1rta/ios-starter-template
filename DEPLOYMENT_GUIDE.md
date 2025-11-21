@@ -22,14 +22,28 @@ Share your app instantly with anyone who has Expo Go installed.
 
 ### Deploy Now
 
+**For Local Network (Same WiFi):**
+
 ```bash
 cd /Users/kirta-linda.karits/Desktop/ios-starter-template
 
-# Start with tunnel (shareable over internet)
-npx expo start --tunnel
+# Start dev server
+npx expo start
 ```
 
-Share the QR code or link with anyone!
+Anyone on your WiFi can scan the QR code!
+
+**For Internet Access (Public):**
+
+```bash
+# First time setup
+npx eas update:configure
+
+# Publish your app
+npx eas update --branch production --message "First deploy"
+```
+
+Share the project URL with anyone worldwide!
 
 **Pros:**
 
@@ -190,6 +204,8 @@ Share the QR code and you're live! 🚀
 
 ⚠️ **`expo publish` is deprecated** - Use `eas update` instead
 
-✅ **Tunnel mode** works great for development and quick sharing
+⚠️ **Tunnel mode (`--tunnel`)** has known issues - Use local network or EAS Update instead
 
-🚀 **EAS Update** is the modern replacement for `expo publish`
+✅ **Local network sharing** works perfectly for same WiFi users
+
+🚀 **EAS Update** is the modern replacement for `expo publish` and tunnel mode
