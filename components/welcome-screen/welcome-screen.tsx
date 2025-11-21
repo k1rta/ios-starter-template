@@ -54,6 +54,17 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
     let isMounted = true;
     const animations: Animated.CompositeAnimation[] = [];
 
+    // Reset all animated values to initial state
+    fadeAnim.setValue(0);
+    slideAnim.setValue(50);
+    pulseAnim.setValue(1);
+    glowAnim.setValue(0.5);
+    particles.forEach((particle) => {
+      particle.x.setValue((Math.random() - 0.5) * 400);
+      particle.y.setValue((Math.random() - 0.5) * 800);
+      particle.opacity.setValue(Math.random() * 0.4 + 0.1);
+    });
+
     // Smooth entrance with easing
     Animated.parallel([
       Animated.timing(fadeAnim, {

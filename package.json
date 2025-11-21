@@ -67,6 +67,22 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|expo(nent)?|@expo(nent)?/.*|expo-.*|@expo-google-fonts/.*|@unimodules/.*|unimodules-.*|sentry-expo|native-base|react-native-svg|@fortawesome/.*)"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 25,
+        "functions": 35,
+        "lines": 35,
+        "statements": 35
+      }
+    },
+    "collectCoverageFrom": [
+      "app/**/*.{ts,tsx}",
+      "components/**/*.{ts,tsx}",
+      "utils/**/*.{ts,tsx}",
+      "!**/*.d.ts",
+      "!**/node_modules/**",
+      "!**/__tests__/**"
     ]
   },
   "expo": {

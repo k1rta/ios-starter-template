@@ -28,15 +28,8 @@ jobs:
           grep -E '\.(ts|tsx)$' | \
           xargs -r npx eslint || echo "No TypeScript files to lint"
       
-      - name: Run tests for changed files
-        run: |
-          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD | grep -E '\.(ts|tsx)$' | tr '\n' ' ')
-          if [ -n "$CHANGED_FILES" ]; then
-            npm test -- --findRelatedTests $CHANGED_FILES --coverage --passWithNoTests
-          else
-            echo "No TypeScript files changed, running all tests"
-            npm test -- --coverage
-          fi
+      - name: Run tests with coverage
+        run: npm test -- --coverage
       
       - name: Check bundle size
         run: |
