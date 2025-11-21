@@ -60,7 +60,9 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.7}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'primary' ? colors.background : colors.primary} />
+        <ActivityIndicator
+          color={variant === 'primary' ? colors.background : colors.primary}
+        />
       ) : (
         <Text style={textStyles}>{title}</Text>
       )}

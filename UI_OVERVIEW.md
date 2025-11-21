@@ -7,6 +7,7 @@ Your app now features a **Modern Minimalist** design that's clean, professional,
 ### Design System
 
 **Color Palette**:
+
 - Background: Clean white (#ffffff)
 - Surface: Light gray (#f8fafc) for cards/containers
 - Primary: Dark slate (#0f172a) for main actions
@@ -14,12 +15,14 @@ Your app now features a **Modern Minimalist** design that's clean, professional,
 - Text: Dark (#0f172a), medium gray (#64748b), light gray (#94a3b8)
 
 **Typography**:
+
 - Titles: 36px, bold, tight spacing
 - Subtitles: 20px, medium weight
 - Body: 16px, regular
 - Stats/Labels: 12px, uppercase
 
 **Spacing**:
+
 - Consistent 4/8/16/24/32px scale
 - Generous padding for touch targets
 - Proper iOS safe areas
@@ -27,27 +30,32 @@ Your app now features a **Modern Minimalist** design that's clean, professional,
 ### Welcome Screen Components
 
 **1. Status Badge**
+
 - Rounded pill shape
 - Subtle background
 - "Production Ready" text
 - Professional, not flashy
 
 **2. Title & Subtitle**
+
 - "Mobile Starter" - Large, bold
 - "Modern React Native Template" - Blue accent color
 - Clean typography hierarchy
 
 **3. Description**
+
 - Clear value proposition
 - Easy to read font size
 - Muted color for hierarchy
 
 **4. Stats Row**
+
 - Three stats: Coverage, Version, Platform
 - Bordered container
 - Shows "iOS" as platform
 
 **5. Action Buttons**
+
 - Primary: "Get Started" - Full width, dark background
 - Secondary: "Settings" & "Docs" - Side by side, outlined
 - Subtle press states
@@ -60,7 +68,7 @@ Your app now features a **Modern Minimalist** design that's clean, professional,
 ✅ **Accessible** - High contrast, clear text  
 ✅ **iOS Native Feel** - Follows iOS design patterns  
 ✅ **Light Mode** - Optimized for light theme  
-✅ **Responsive** - Works on all iOS device sizes  
+✅ **Responsive** - Works on all iOS device sizes
 
 ---
 
@@ -101,6 +109,7 @@ When you run the app (`npm start` then `i` for iOS):
 ```
 
 **Colors in Action**:
+
 - Background: Pure white
 - Buttons: Dark slate with white text
 - Accents: Subtle blue
@@ -112,15 +121,18 @@ When you run the app (`npm start` then `i` for iOS):
 ## Expo Setup - Do You Need to Login?
 
 ### For Development (Current State)
+
 **NO LOGIN REQUIRED** ✅
 
 You can develop and test without an Expo account:
+
 ```bash
 npm start  # Works without login
 npm run ios  # Works without login
 ```
 
 ### For Production Builds
+
 **LOGIN REQUIRED** ⚠️
 
 When you want to build for App Store:
@@ -139,14 +151,14 @@ npx eas build --platform ios
 
 ### When to Login
 
-| Task | Login Required? |
-|------|----------------|
-| Local development | ❌ No |
-| iOS Simulator | ❌ No |
-| Testing with Expo Go | ❌ No |
-| Building with EAS | ✅ Yes |
-| Deploying to App Store | ✅ Yes |
-| Using EAS Submit | ✅ Yes |
+| Task                   | Login Required? |
+| ---------------------- | --------------- |
+| Local development      | ❌ No           |
+| iOS Simulator          | ❌ No           |
+| Testing with Expo Go   | ❌ No           |
+| Building with EAS      | ✅ Yes          |
+| Deploying to App Store | ✅ Yes          |
+| Using EAS Submit       | ✅ Yes          |
 
 **Bottom Line**: You can develop your entire app without logging in. Only login when you're ready to build for production or App Store.
 
@@ -158,19 +170,20 @@ npx eas build --platform ios
 
 ### Pros & Cons
 
-| Name | Pros | Cons | SEO Score |
-|------|------|------|-----------|
-| `free-ios-app-creation-template` | Very descriptive, shows it's free | Too long (32 chars), redundant "creation" | 7/10 |
-| `ios-starter-template` ⭐ | Short, clear, professional | Doesn't mention React Native | 8/10 |
-| `react-native-ios-template` ⭐⭐ | Shows tech stack, searchable | Medium length | 9/10 |
-| `expo-ios-starter` ⭐ | Shows Expo, short | Less generic appeal | 8/10 |
-| `ios-app-template` | Very short | Too generic, hard to discover | 6/10 |
+| Name                             | Pros                              | Cons                                      | SEO Score |
+| -------------------------------- | --------------------------------- | ----------------------------------------- | --------- |
+| `free-ios-app-creation-template` | Very descriptive, shows it's free | Too long (32 chars), redundant "creation" | 7/10      |
+| `ios-starter-template` ⭐        | Short, clear, professional        | Doesn't mention React Native              | 8/10      |
+| `react-native-ios-template` ⭐⭐ | Shows tech stack, searchable      | Medium length                             | 9/10      |
+| `expo-ios-starter` ⭐            | Shows Expo, short                 | Less generic appeal                       | 8/10      |
+| `ios-app-template`               | Very short                        | Too generic, hard to discover             | 6/10      |
 
 ### Recommendation
 
 **Best Choice**: `react-native-ios-template`
 
 **Why**:
+
 - ✅ SEO-friendly (people search "react native ios template")
 - ✅ Clear tech stack indication
 - ✅ Professional sounding
@@ -250,8 +263,8 @@ describe('App Flow Integration', () => {
 appId: com.yourcompany.app
 ---
 - launchApp
-- assertVisible: "Mobile Starter"
-- tapOn: "Get Started"
+- assertVisible: 'Mobile Starter'
+- tapOn: 'Get Started'
 ```
 
 **When to use**: Critical user journeys, release testing
@@ -273,6 +286,7 @@ expect(getByText(TEST_DATA.APP_TITLE)).toBeTruthy();
 ```
 
 **Benefits**:
+
 - ✅ Single source of truth
 - ✅ Easy updates across all tests
 - ✅ No typos
@@ -321,6 +335,7 @@ See [ADDING_PAGES.md](ADDING_PAGES.md) for complete guide.
 **Quick Example**:
 
 1. Create `app/dashboard.tsx`:
+
 ```typescript
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@/constants/colors';
@@ -346,6 +361,7 @@ const styles = StyleSheet.create({
 ```
 
 2. Navigate to it:
+
 ```typescript
 import { router } from 'expo-router';
 
@@ -370,6 +386,7 @@ See [GITHUB_SETUP.md](GITHUB_SETUP.md) for complete guide.
 6. **Create first release**: Tag v1.0.0
 
 **Required Secrets**:
+
 - `EXPO_TOKEN` - For automated builds (get with `npx expo whoami --token`)
 
 ---

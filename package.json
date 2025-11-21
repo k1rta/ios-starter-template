@@ -75,7 +75,9 @@
     "scheme": "iosstarter",
     "version": "1.0.0",
     "orientation": "default",
-    "platforms": ["ios"],
+    "platforms": [
+      "ios"
+    ],
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {

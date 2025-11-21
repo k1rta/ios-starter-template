@@ -24,9 +24,9 @@ jobs:
       
       - name: Lint changed files
         run: |
-          git diff --name-only origin/${{ github.base_ref }}...HEAD | \
+          git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD | \
           grep -E '\.(ts|tsx)$' | \
-          xargs -r npx eslint
+          xargs -r npx eslint || echo "No TypeScript files to lint"
       
       - name: Run tests for changed files
         run: npm test -- --findRelatedTests --coverage

@@ -1,5 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Pressable, Animated, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Animated,
+  Platform,
+} from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMobileScreenButton } from '@fortawesome/free-solid-svg-icons';
 import { colors } from '@/constants/colors';
@@ -40,7 +47,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
       x: new Animated.Value((Math.random() - 0.5) * 400), // -200 to 200
       y: new Animated.Value((Math.random() - 0.5) * 800), // -400 to 400
       opacity: new Animated.Value(Math.random() * 0.4 + 0.1),
-    }))
+    })),
   ).current;
 
   useEffect(() => {
@@ -72,7 +79,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           duration: 2000,
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
 
     // Breathing glow effect
@@ -88,7 +95,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           duration: 2500,
           useNativeDriver: true,
         }),
-      ])
+      ]),
     ).start();
 
     // Animate particles across entire screen
@@ -131,7 +138,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 duration: 2000,
                 useNativeDriver: true,
               }),
-            ])
+            ]),
           ),
         ]).start(() => animateParticle());
       };
@@ -170,27 +177,47 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         <View style={styles.header}>
           <View style={styles.iconContainer}>
             <View style={styles.iconCircle}>
-              <FontAwesomeIcon icon={faMobileScreenButton} size={48} color="#00E5FF" />
+              <FontAwesomeIcon
+                icon={faMobileScreenButton}
+                size={48}
+                color="#00E5FF"
+              />
             </View>
           </View>
-          <Text style={styles.title} testID="welcome-title">{title}</Text>
-          {subtitle ? <Text style={styles.subtitle} testID="welcome-subtitle">{subtitle}</Text> : null}
-          {description ? <Text style={styles.description} testID="welcome-description">{description}</Text> : null}
+          <Text style={styles.title} testID="welcome-title">
+            {title}
+          </Text>
+          {subtitle ? (
+            <Text style={styles.subtitle} testID="welcome-subtitle">
+              {subtitle}
+            </Text>
+          ) : null}
+          {description ? (
+            <Text style={styles.description} testID="welcome-description">
+              {description}
+            </Text>
+          ) : null}
         </View>
-        
+
         <View style={styles.statsContainer} testID="stats-container">
           <View style={styles.statItem}>
-            <Text style={styles.statValue} testID="stat-coverage-value">100%</Text>
+            <Text style={styles.statValue} testID="stat-coverage-value">
+              100%
+            </Text>
             <Text style={styles.statLabel}>COVERAGE</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statValue} testID="stat-version-value">v1.0</Text>
+            <Text style={styles.statValue} testID="stat-version-value">
+              v1.0
+            </Text>
             <Text style={styles.statLabel}>VERSION</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statValue} testID="stat-platform-value">iOS</Text>
+            <Text style={styles.statValue} testID="stat-platform-value">
+              iOS
+            </Text>
             <Text style={styles.statLabel}>PLATFORM</Text>
           </View>
         </View>
@@ -210,7 +237,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               </Text>
             </Pressable>
           ) : null}
-          
+
           <View style={styles.secondaryActionsRow}>
             {onSecondaryActionPress ? (
               <Pressable

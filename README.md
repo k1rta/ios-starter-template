@@ -12,19 +12,22 @@
 ## ✨ Features
 
 ### 🎨 Modern UI
+
 - **Glassmorphism design** with transparent cards
-- **Colorful Font Awesome icons** with gradient backgrounds  
+- **Colorful Font Awesome icons** with gradient backgrounds
 - **8 animated particles** floating across screen
 - **Dark theme** optimized for iOS
 - **Smooth animations** using React Native Animated API
 
 ### 📊 GitHub Stats Page
+
 - Real-time repository statistics
 - Beautiful icon backgrounds (gold, purple, cyan, green, orange, pink)
 - Auto-fetch from GitHub API
 - Error handling with retry
 
 ### 🛠️ Developer Experience
+
 - **TypeScript** strict mode
 - **Expo Router** file-based navigation
 - **Font Awesome** solid icons
@@ -53,15 +56,17 @@ npm start
 ## 📱 Pages
 
 ### Home Screen (`/`)
+
 - Large mobile icon with glow effect
 - App title and description
 - Coverage/Version/Platform stats
 - 3 action buttons
 
 ### Stats Screen (`/stats`)
+
 - 6 colorful stat cards:
   - ⭐ **Stars** (gold)
-  - 🔱 **Forks** (purple)  
+  - 🔱 **Forks** (purple)
   - 👁️ **Watchers** (cyan)
   - 💾 **Size** (green)
   - ⚠️ **Issues** (orange)
@@ -72,6 +77,7 @@ npm start
 ## 🎨 Icon Colors
 
 Each stat has a unique festive color:
+
 - Gold (`#FFD700`) - Stars
 - Purple (`#8A2BE2`) - Forks
 - Cyan (`#00E5FF`) - Watchers
@@ -127,19 +133,21 @@ ios-starter-template/
 ### Update GitHub Repo
 
 Edit `app/stats.tsx` line 107:
+
 ```typescript
-'https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO'
+'https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO';
 ```
 
 ### Change Colors
 
 Edit `constants/colors.ts`:
+
 ```typescript
 export const colors = {
-  primary: '#00E5FF',    // Change theme color
+  primary: '#00E5FF', // Change theme color
   background: '#0a0f1e', // Change background
   // ...
-}
+};
 ```
 
 ### Add New Page
@@ -158,7 +166,7 @@ router.push('/new-page');
 
 - [TEST_REPORT.md](./TEST_REPORT.md) - Testing results
 - [GITHUB_SETUP.md](./GITHUB_SETUP.md) - Repository setup
-- [__tests__/README.md](./__tests__/README.md) - Testing guide
+- [**tests**/README.md](./__tests__/README.md) - Testing guide
 
 ---
 

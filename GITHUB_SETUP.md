@@ -7,6 +7,7 @@ Complete guide for setting up your iOS app template repository on GitHub.
 **Current**: `free-ios-app-creation-template`
 
 **Recommendations**:
+
 - ✅ **`ios-starter-template`** - Short, clear, professional
 - ✅ **`react-native-ios-template`** - Descriptive, SEO-friendly
 - ✅ **`expo-ios-starter`** - Shows tech stack clearly
@@ -87,6 +88,7 @@ Add these secrets:
 #### Required Secrets
 
 **`EXPO_TOKEN`** (Required for CI/CD builds)
+
 ```bash
 # Generate token
 npx expo login
@@ -99,7 +101,7 @@ npx expo whoami --token
 
 **`APPLE_ID`** - Your Apple ID email  
 **`APPLE_APP_SPECIFIC_PASSWORD`** - Generate at appleid.apple.com  
-**`APPLE_TEAM_ID`** - Found in Apple Developer Portal  
+**`APPLE_TEAM_ID`** - Found in Apple Developer Portal
 
 ---
 
@@ -108,7 +110,7 @@ npx expo whoami --token
 Add these topics to help users find your template:
 
 ```
-ios, react-native, expo, typescript, template, 
+ios, react-native, expo, typescript, template,
 starter, boilerplate, mobile-app, ios-development
 ```
 
@@ -145,6 +147,7 @@ The template already includes `.github/workflows/ci.yml`. Verify it's set up cor
 ### Test the Workflow
 
 1. Make a small change and commit:
+
    ```bash
    git add .
    git commit -m "Test CI workflow"
@@ -181,20 +184,21 @@ git push origin v1.0.0
 2. Tag: `v1.0.0`
 3. Title: `v1.0.0 - Initial Release`
 4. Description:
+
    ```markdown
    ## 🎉 Initial Release
-   
+
    A production-ready iOS app template with:
-   
+
    - ✨ Modern UI with clean design
    - 🧪 Comprehensive testing (Unit, Integration, E2E)
    - 🚀 CI/CD with GitHub Actions
    - 📱 iOS-optimized
    - 🔧 TypeScript, ESLint, Prettier
    - 📚 Complete documentation
-   
+
    ## Getting Started
-   
+
    See [README.md](README.md) for installation and usage.
    ```
 
@@ -218,6 +222,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. See error
@@ -229,9 +234,10 @@ What you expected to happen.
 If applicable, add screenshots.
 
 **Environment:**
- - Device: [e.g. iPhone 15]
- - iOS Version: [e.g. 17.0]
- - App Version: [e.g. 1.0.0]
+
+- Device: [e.g. iPhone 15]
+- iOS Version: [e.g. 17.0]
+- App Version: [e.g. 1.0.0]
 ```
 
 Create `.github/ISSUE_TEMPLATE/feature_request.md`:

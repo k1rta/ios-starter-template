@@ -5,6 +5,7 @@ This template supports **iOS** platform.
 ## Current Configuration
 
 The app is configured to support **iOS** by default:
+
 - ✅ iOS
 
 ## Platform-Specific Configuration
@@ -38,6 +39,7 @@ if (Platform.OS === 'ios') {
 ## Build Commands
 
 ### iOS
+
 ```bash
 # Development
 npm run ios

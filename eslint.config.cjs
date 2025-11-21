@@ -9,7 +9,15 @@ const compat = new FlatCompat({
 
 module.exports = [
   {
-    ignores: ['**/*.config.js', '**/*.config.cjs', 'metro.config.js', 'node_modules/', 'dist/', '.expo/', '__mocks__/'],
+    ignores: [
+      '**/*.config.js',
+      '**/*.config.cjs',
+      'metro.config.js',
+      'node_modules/',
+      'dist/',
+      '.expo/',
+      '__mocks__/',
+    ],
   },
   {
     files: ['**/*.{ts,tsx}'],

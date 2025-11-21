@@ -9,6 +9,7 @@ When you run the app, press each button to see console output:
 3. **Docs** → Logs: `📚 Documentation: Opening help resources`
 
 Open the developer console to see these logs:
+
 - **iOS/Android**: Shake device → "Debug" → "Show Element Inspector"
 - **Expo Go**: Shake device → "Debug Remote JS"
 - **Terminal**: Logs appear in the terminal where you ran `npx expo start`
@@ -28,6 +29,7 @@ touch app/settings.tsx
 ```
 
 **Example `app/dashboard.tsx`:**
+
 ```tsx
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@/constants/colors';
@@ -98,7 +100,7 @@ import { router } from 'expo-router';
 const handleInitialize = async () => {
   // Mark onboarding as complete
   await AsyncStorage.setItem('onboardingComplete', 'true');
-  
+
   // Navigate to main app
   router.replace('/dashboard');
 };
@@ -130,7 +132,9 @@ const handleConfigure = () => {
 };
 
 // In your JSX:
-{showConfig && <ConfigModal onClose={() => setShowConfig(false)} />}
+{
+  showConfig && <ConfigModal onClose={() => setShowConfig(false)} />;
+}
 ```
 
 ## Customizing the Welcome Screen
@@ -139,11 +143,11 @@ const handleConfigure = () => {
 
 ```tsx
 <WelcomeScreen
-  badgeText="READY"              // Top badge
-  title="My Awesome App"         // Main title
-  subtitle="Tagline Here"        // Cyan subtitle
+  badgeText="READY" // Top badge
+  title="My Awesome App" // Main title
+  subtitle="Tagline Here" // Cyan subtitle
   description="Longer description of what your app does..."
-  primaryActionLabel="Start"     // Button text
+  primaryActionLabel="Start" // Button text
   secondaryActionLabel="Setup"
   tertiaryActionLabel="Help"
 />
@@ -165,6 +169,7 @@ Simply don't pass the handler:
 ### Change Button Order
 
 The buttons are always rendered in this order:
+
 1. Primary (full width)
 2. Secondary + Tertiary (side by side)
 
@@ -218,6 +223,7 @@ Make sure `tsconfig.json` has the path mappings:
 ### App Crashes on Button Press
 
 Check the terminal/console for error messages. Common issues:
+
 - Typo in route path
 - Missing screen file
 - Async function not awaited

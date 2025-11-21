@@ -158,11 +158,13 @@ free-mobile-app-template/
 ### Creating a New Component
 
 1. **Create component directory**:
+
 ```bash
 mkdir components/MyComponent
 ```
 
 2. **Create component file**:
+
 ```tsx
 // components/MyComponent/MyComponent.tsx
 import React from 'react';
@@ -196,12 +198,14 @@ const styles = StyleSheet.create({
 ```
 
 3. **Export from index**:
+
 ```tsx
 // components/index.ts
 export { MyComponent } from './MyComponent/MyComponent';
 ```
 
 4. **Create tests**:
+
 ```tsx
 // __tests__/unit/MyComponent.test.tsx
 import { render } from '@testing-library/react-native';
@@ -223,16 +227,8 @@ import { Button, Card, Input } from '@/components';
 function MyScreen() {
   return (
     <Card elevated>
-      <Input 
-        label="Email" 
-        placeholder="Enter email"
-        error={error}
-      />
-      <Button 
-        title="Submit" 
-        variant="primary"
-        onPress={handleSubmit}
-      />
+      <Input label="Email" placeholder="Enter email" error={error} />
+      <Button title="Submit" variant="primary" onPress={handleSubmit} />
     </Card>
   );
 }
@@ -264,10 +260,10 @@ Test component interactions and data flow.
 describe('Login Flow', () => {
   it('should navigate to dashboard after login', async () => {
     const { getByText, getByPlaceholderText } = render(<LoginScreen />);
-    
+
     fireEvent.changeText(getByPlaceholderText('Email'), 'test@example.com');
     fireEvent.press(getByText('Login'));
-    
+
     await waitFor(() => {
       expect(mockRouter.push).toHaveBeenCalledWith('/dashboard');
     });
@@ -311,6 +307,7 @@ npm test -- -u
 #### 1. CI Workflow (`.github/workflows/ci.yml`)
 
 Runs on every push and PR:
+
 - Linting
 - Type checking
 - Unit & integration tests
@@ -319,6 +316,7 @@ Runs on every push and PR:
 #### 2. PR Checks (`.github/workflows/pr-checks.yml`)
 
 Additional PR validation:
+
 - Changed file linting
 - Related tests
 - Bundle size check
@@ -462,6 +460,7 @@ npx expo customize tsconfig.json
 ### Git Hooks
 
 Pre-commit hooks (via Husky):
+
 - Lint staged files
 - Format with Prettier
 - Run affected tests

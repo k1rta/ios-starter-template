@@ -212,7 +212,7 @@ export default function Settings() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Settings</Text>
-      
+
       {settings.map((setting) => (
         <Pressable
           key={setting.route}
@@ -358,6 +358,7 @@ router.push(`/user/${userId}`);
 ## Navigation Methods
 
 ### Push (Navigate forward)
+
 ```typescript
 import { router } from 'expo-router';
 
@@ -367,20 +368,23 @@ router.push({ pathname: '/profile', params: { name: 'John' } });
 ```
 
 ### Replace (Replace current screen)
+
 ```typescript
 router.replace('/dashboard'); // Can't go back
 ```
 
 ### Back (Go back)
+
 ```typescript
 router.back();
 ```
 
 ### Navigate with parameters
+
 ```typescript
-router.push({ 
-  pathname: '/details', 
-  params: { id: '123', name: 'Product' } 
+router.push({
+  pathname: '/details',
+  params: { id: '123', name: 'Product' },
 });
 
 // Access params in details page:
@@ -412,7 +416,7 @@ export default function SettingsLayout() {
         </Pressable>
         <Text style={styles.headerTitle}>Settings</Text>
       </View>
-      
+
       {/* Child pages render here */}
       <Slot />
     </View>
@@ -450,6 +454,7 @@ const styles = StyleSheet.create({
 ## Best Practices
 
 ### ✅ DO
+
 - Use `SafeAreaView` for proper iOS safe area handling
 - Import and use color/spacing constants
 - Add TypeScript types for params
@@ -457,6 +462,7 @@ const styles = StyleSheet.create({
 - Use layouts for shared UI
 
 ### ❌ DON'T
+
 - Hardcode colors or spacing values
 - Create deeply nested folder structures (max 2-3 levels)
 - Put business logic directly in pages (create hooks/utils)
@@ -486,6 +492,7 @@ describe('Dashboard Page', () => {
 ## Common Patterns
 
 ### Loading State
+
 ```typescript
 const [loading, setLoading] = useState(true);
 
@@ -495,6 +502,7 @@ if (loading) {
 ```
 
 ### Error Handling
+
 ```typescript
 const [error, setError] = useState<string | null>(null);
 
@@ -504,6 +512,7 @@ if (error) {
 ```
 
 ### Data Fetching
+
 ```typescript
 useEffect(() => {
   async function fetchData() {

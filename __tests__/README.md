@@ -18,11 +18,13 @@ __tests__/
 ### What We Test
 
 **Constants** (`colors.test.ts`, `spacing.test.ts`)
+
 - Validate all required properties exist
 - Check correct value types (hex, rgba, numbers)
 - Verify color/spacing values are valid
 
 **Utilities** (`utils.test.ts`)
+
 - Pure function behavior
 - Edge cases (empty strings, etc.)
 - Return value correctness
@@ -47,7 +49,7 @@ npm test colors.test.ts
 
 - **9 unit tests** covering:
   - ✅ Color constants (8 tests)
-  - ✅ Spacing constants (2 tests)  
+  - ✅ Spacing constants (2 tests)
   - ✅ Utility functions (3 tests)
 
 ## 📝 Adding New Tests

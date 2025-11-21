@@ -1,9 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Animated, Platform, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Animated,
+  Platform,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar, faCodeBranch, faEye, faHdd, faCircleExclamation, faClock } from '@fortawesome/free-solid-svg-icons';
+import {
+  faStar,
+  faCodeBranch,
+  faEye,
+  faHdd,
+  faCircleExclamation,
+  faClock,
+} from '@fortawesome/free-solid-svg-icons';
 import { colors } from '@/constants/colors';
 import { spacing } from '@/constants/spacing';
 
@@ -32,7 +47,7 @@ export default function StatsScreen() {
       x: new Animated.Value((Math.random() - 0.5) * 400),
       y: new Animated.Value((Math.random() - 0.5) * 800),
       opacity: new Animated.Value(Math.random() * 0.4 + 0.1),
-    }))
+    })),
   ).current;
 
   useEffect(() => {
@@ -97,7 +112,7 @@ export default function StatsScreen() {
                 duration: 2000,
                 useNativeDriver: true,
               }),
-            ])
+            ]),
           ),
         ]);
         animations.push(anim);
@@ -113,7 +128,7 @@ export default function StatsScreen() {
 
     return () => {
       isMounted = false;
-      animations.forEach(anim => anim.stop());
+      animations.forEach((anim) => anim.stop());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -122,26 +137,26 @@ export default function StatsScreen() {
     try {
       const url = 'https://api.github.com/repos/k1rta/ios-starter-template';
       console.log('🌐 Fetching GitHub stats from:', url);
-      
+
       const response = await fetch(url);
-      
+
       console.log('📡 Response status:', response.status);
       console.log('📡 Response headers:', response.headers);
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch stats');
       }
 
       const data = await response.json();
       console.log('✅ GitHub API Response:', data);
-      
+
       const lastUpdated = new Date(data.updated_at);
-      const formattedDate = lastUpdated.toLocaleDateString('en-US', { 
-        month: 'short', 
+      const formattedDate = lastUpdated.toLocaleDateString('en-US', {
+        month: 'short',
         day: 'numeric',
-        year: 'numeric'
+        year: 'numeric',
       });
-      
+
       setStats({
         stars: data.stargazers_count,
         forks: data.forks_count,
@@ -208,7 +223,12 @@ export default function StatsScreen() {
         ) : stats ? (
           <View style={styles.statsGrid}>
             <View style={styles.statCard}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(255, 215, 0, 0.15)' }]}>
+              <View
+                style={[
+                  styles.iconCircle,
+                  { backgroundColor: 'rgba(255, 215, 0, 0.15)' },
+                ]}
+              >
                 <FontAwesomeIcon icon={faStar} size={28} color="#FFD700" />
               </View>
               <Text style={styles.statValue}>{stats.stars}</Text>
@@ -216,23 +236,46 @@ export default function StatsScreen() {
             </View>
 
             <View style={styles.statCard}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(138, 43, 226, 0.15)' }]}>
-                <FontAwesomeIcon icon={faCodeBranch} size={28} color="#8A2BE2" />
+              <View
+                style={[
+                  styles.iconCircle,
+                  { backgroundColor: 'rgba(138, 43, 226, 0.15)' },
+                ]}
+              >
+                <FontAwesomeIcon
+                  icon={faCodeBranch}
+                  size={28}
+                  color="#8A2BE2"
+                />
               </View>
               <Text style={styles.statValue}>{stats.forks}</Text>
               <Text style={styles.statLabel}>Forks</Text>
             </View>
 
             <View style={styles.statCard}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(0, 229, 255, 0.15)' }]}>
-                <FontAwesomeIcon icon={faEye} size={28} color={colors.primary} />
+              <View
+                style={[
+                  styles.iconCircle,
+                  { backgroundColor: 'rgba(0, 229, 255, 0.15)' },
+                ]}
+              >
+                <FontAwesomeIcon
+                  icon={faEye}
+                  size={28}
+                  color={colors.primary}
+                />
               </View>
               <Text style={styles.statValue}>{stats.watchers}</Text>
               <Text style={styles.statLabel}>Watchers</Text>
             </View>
 
             <View style={styles.statCard}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(50, 205, 50, 0.15)' }]}>
+              <View
+                style={[
+                  styles.iconCircle,
+                  { backgroundColor: 'rgba(50, 205, 50, 0.15)' },
+                ]}
+              >
                 <FontAwesomeIcon icon={faHdd} size={28} color="#32CD32" />
               </View>
               <Text style={styles.statValue}>{stats.size}MB</Text>
@@ -240,8 +283,17 @@ export default function StatsScreen() {
             </View>
 
             <View style={styles.statCard}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(255, 69, 0, 0.15)' }]}>
-                <FontAwesomeIcon icon={faCircleExclamation} size={28} color="#FF4500" />
+              <View
+                style={[
+                  styles.iconCircle,
+                  { backgroundColor: 'rgba(255, 69, 0, 0.15)' },
+                ]}
+              >
+                <FontAwesomeIcon
+                  icon={faCircleExclamation}
+                  size={28}
+                  color="#FF4500"
+                />
               </View>
               <View style={styles.valueContainer}>
                 <Text style={styles.statValue}>{stats.openIssues}</Text>
@@ -250,11 +302,18 @@ export default function StatsScreen() {
             </View>
 
             <View style={styles.statCard}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(255, 105, 180, 0.15)' }]}>
+              <View
+                style={[
+                  styles.iconCircle,
+                  { backgroundColor: 'rgba(255, 105, 180, 0.15)' },
+                ]}
+              >
                 <FontAwesomeIcon icon={faClock} size={28} color="#FF69B4" />
               </View>
               <View style={styles.valueContainer}>
-                <Text style={[styles.statValue, styles.dateValue]}>{stats.lastUpdated}</Text>
+                <Text style={[styles.statValue, styles.dateValue]}>
+                  {stats.lastUpdated}
+                </Text>
               </View>
               <Text style={styles.statLabel}>Last Updated</Text>
             </View>

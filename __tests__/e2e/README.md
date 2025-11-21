@@ -24,11 +24,11 @@ Create `__tests__/e2e/welcome-flow.yaml`:
 appId: com.yourcompany.freeiostemplateapp
 ---
 - launchApp
-- assertVisible: "Mobile Starter"
-- assertVisible: "Modern React Native Template"
-- assertVisible: "Get Started"
-- tapOn: "Get Started"
-- assertVisible: "Initialize"
+- assertVisible: 'Mobile Starter'
+- assertVisible: 'Modern React Native Template'
+- assertVisible: 'Get Started'
+- tapOn: 'Get Started'
+- assertVisible: 'Initialize'
 ```
 
 ### Run E2E Tests
@@ -121,11 +121,13 @@ describe('Welcome Screen', () => {
 ## Test Scenarios to Cover
 
 ### Critical Paths
+
 - ✅ App launch and welcome screen
 - ✅ Primary navigation flows
 - ✅ Core user actions
 
 ### Optional Paths
+
 - Form validation
 - Error handling
 - Offline behavior
@@ -146,14 +148,17 @@ See `.github/workflows/e2e-tests.yml` for automated E2E testing on GitHub Action
 ## Troubleshooting
 
 ### Maestro can't find app
+
 - Ensure app is built: `npm run ios`
 - Check appId matches your bundle identifier
 
 ### Tests are flaky
+
 - Add explicit waits
 - Use retry logic
 - Check for animations completing
 
 ### Simulator issues
+
 - Reset simulator: `xcrun simctl erase all`
 - Restart Simulator.app
