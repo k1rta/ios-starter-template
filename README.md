@@ -5,7 +5,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)](https://www.typescriptlang.org/)
 [![React Native](https://img.shields.io/badge/React%20Native-0.81-green)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-SDK%2054-black)](https://expo.dev/)
-[![Tests](https://img.shields.io/badge/tests-17%20passing-brightgreen)](./TEST_REPORT.md)
+[![Tests](https://img.shields.io/badge/tests-32%20passing-brightgreen)](https://github.com/k1rta/ios-starter-template)
 
 ---
 
@@ -32,7 +32,7 @@
 - **Expo Router** file-based navigation
 - **Font Awesome** solid icons
 - **ESLint + Prettier** configured
-- **17 unit tests** - all passing
+- **32 unit tests** - all passing with 36% coverage
 - **Husky** pre-commit hooks
 
 ---
@@ -100,9 +100,14 @@ npm test -- --watch
 npm test -- --coverage
 ```
 
-**Current Status**: ✅ **17/17 tests passing**
+**Current Status**: ✅ **32/32 tests passing** | Coverage: 36%
 
-See [TEST_REPORT.md](./TEST_REPORT.md) for detailed results.
+Tests cover:
+
+- Color constants and spacing utilities (100% coverage)
+- Welcome screen component (100% coverage)
+- Home screen component (37.5% coverage)
+- Coverage enforcement: PRs must maintain minimum thresholds
 
 ---
 
@@ -122,7 +127,7 @@ ios-starter-template/
 ├── utils/
 │   └── index.ts           # Utility functions
 ├── __tests__/
-│   └── unit/              # Unit tests (17 tests)
+│   └── unit/              # Unit tests (32 tests)
 └── package.json
 ```
 
@@ -165,7 +170,6 @@ router.push('/new-page');
 ## 📚 Documentation
 
 - [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - Deploy without App Store
-- [TEST_REPORT.md](./TEST_REPORT.md) - Testing results
 
 ---
 

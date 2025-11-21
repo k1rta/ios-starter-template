@@ -51,6 +51,19 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   ).current;
 
   useEffect(() => {
+    const animations: Animated.CompositeAnimation[] = [];
+
+    // Reset all animated values to initial state
+    fadeAnim.setValue(0);
+    slideAnim.setValue(50);
+    pulseAnim.setValue(1);
+    glowAnim.setValue(0.5);
+    particles.forEach((particle) => {
+      particle.x.setValue((Math.random() - 0.5) * 400);
+      particle.y.setValue((Math.random() - 0.5) * 800);
+      particle.opacity.setValue(Math.random() * 0.4 + 0.1);
+    });
+
     // Smooth entrance with easing
     Animated.parallel([
       Animated.timing(fadeAnim, {
@@ -67,7 +80,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
     ]).start();
 
     // Smooth pulsing glow animation
-    Animated.loop(
+    const pulseLoop = Animated.loop(
       Animated.sequence([
         Animated.timing(pulseAnim, {
           toValue: 1.08,
@@ -80,10 +93,12 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           useNativeDriver: true,
         }),
       ]),
-    ).start();
+    );
+    animations.push(pulseLoop);
+    pulseLoop.start();
 
     // Breathing glow effect
-    Animated.loop(
+    const glowLoop = Animated.loop(
       Animated.sequence([
         Animated.timing(glowAnim, {
           toValue: 1,
@@ -96,54 +111,70 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           useNativeDriver: true,
         }),
       ]),
-    ).start();
+    );
+    animations.push(glowLoop);
+    glowLoop.start();
 
-    // Animate particles across entire screen
+    // Animate particles across entire screen with continuous loops
     particles.forEach((particle, index) => {
-      const animateParticle = () => {
-        Animated.parallel([
-          Animated.sequence([
-            Animated.timing(particle.x, {
-              toValue: (Math.random() - 0.5) * 400, // -200 to 200
-              duration: 3000 + index * 1000,
-              useNativeDriver: true,
-            }),
-            Animated.timing(particle.x, {
-              toValue: (Math.random() - 0.5) * 400,
-              duration: 3000 + index * 1000,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(particle.y, {
-              toValue: (Math.random() - 0.5) * 800, // -400 to 400
-              duration: 4000 + index * 800,
-              useNativeDriver: true,
-            }),
-            Animated.timing(particle.y, {
-              toValue: (Math.random() - 0.5) * 800,
-              duration: 4000 + index * 800,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.loop(
-            Animated.sequence([
-              Animated.timing(particle.opacity, {
-                toValue: 0.5,
-                duration: 2000,
-                useNativeDriver: true,
-              }),
-              Animated.timing(particle.opacity, {
-                toValue: 0.1,
-                duration: 2000,
-                useNativeDriver: true,
-              }),
-            ]),
-          ),
-        ]).start(() => animateParticle());
-      };
-      animateParticle();
+      // X-axis movement loop
+      const xLoop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(particle.x, {
+            toValue: (Math.random() - 0.5) * 400,
+            duration: 3000 + index * 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(particle.x, {
+            toValue: (Math.random() - 0.5) * 400,
+            duration: 3000 + index * 1000,
+            useNativeDriver: true,
+          }),
+        ]),
+      );
+
+      // Y-axis movement loop
+      const yLoop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(particle.y, {
+            toValue: (Math.random() - 0.5) * 800,
+            duration: 4000 + index * 800,
+            useNativeDriver: true,
+          }),
+          Animated.timing(particle.y, {
+            toValue: (Math.random() - 0.5) * 800,
+            duration: 4000 + index * 800,
+            useNativeDriver: true,
+          }),
+        ]),
+      );
+
+      // Opacity loop
+      const opacityLoop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(particle.opacity, {
+            toValue: 0.5,
+            duration: 2000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(particle.opacity, {
+            toValue: 0.1,
+            duration: 2000,
+            useNativeDriver: true,
+          }),
+        ]),
+      );
+
+      animations.push(xLoop, yLoop, opacityLoop);
+      xLoop.start();
+      yLoop.start();
+      opacityLoop.start();
     });
+
+    // Cleanup on unmount - stop ALL animations
+    return () => {
+      animations.forEach((anim) => anim.stop());
+    };
   }, [fadeAnim, slideAnim, pulseAnim, glowAnim, particles]);
 
   return (
@@ -179,8 +210,8 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
             <View style={styles.iconCircle}>
               <FontAwesomeIcon
                 icon={faMobileScreenButton}
-                size={48}
-                color="#00E5FF"
+                size={52}
+                color="#00FFFF" // Brighter cyan for more pop
               />
             </View>
           </View>
@@ -285,18 +316,18 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     maxWidth: 520,
-    backgroundColor: 'rgba(19, 24, 36, 0.7)', // Semi-transparent glass effect
-    borderRadius: 24,
+    backgroundColor: 'rgba(15, 20, 30, 0.85)', // Darker, more modern glass effect
+    borderRadius: 28,
     padding: spacing.xl,
-    borderWidth: 1.5,
-    borderColor: 'rgba(0, 229, 255, 0.3)', // Glowing cyan border
+    borderWidth: 2,
+    borderColor: 'rgba(0, 229, 255, 0.4)', // Stronger cyan border
     overflow: 'hidden',
     ...Platform.select({
       ios: {
-        shadowColor: colors.primary,
-        shadowOffset: { width: 0, height: 20 },
-        shadowOpacity: 0.6,
-        shadowRadius: 60,
+        shadowColor: '#00E5FF',
+        shadowOffset: { width: 0, height: 24 },
+        shadowOpacity: 0.7,
+        shadowRadius: 80,
       },
     }),
   },
@@ -308,39 +339,49 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   iconCircle: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'rgba(0, 229, 255, 0.12)',
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    backgroundColor: 'rgba(0, 229, 255, 0.18)', // More vibrant background
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'rgba(0, 229, 255, 0.5)', // Add border to make it pop
     ...Platform.select({
       ios: {
-        shadowColor: colors.primary,
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.3,
-        shadowRadius: 16,
+        shadowColor: '#00E5FF',
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.6,
+        shadowRadius: 24,
       },
     }),
   },
   title: {
-    fontSize: 48,
+    fontSize: 52,
     fontWeight: '800',
-    color: colors.textPrimary,
+    color: '#FFFFFF', // Pure white for better contrast
     marginBottom: spacing.xs,
     textAlign: 'center',
     letterSpacing: 0.5,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#00E5FF',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+      },
+    }),
   },
   subtitle: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: colors.primary,
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#00FFFF', // Bright cyan
     marginBottom: spacing.sm,
     textAlign: 'center',
     letterSpacing: 1.5,
-    textShadowColor: colors.shadowSoft,
+    textShadowColor: '#00E5FF',
     textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 10,
+    textShadowRadius: 12,
   },
   description: {
     fontSize: 15,
@@ -390,17 +431,19 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     width: '100%',
-    borderRadius: 12,
-    paddingVertical: 16,
+    borderRadius: 14,
+    paddingVertical: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary,
+    backgroundColor: '#00E5FF', // Bright cyan
+    borderWidth: 1,
+    borderColor: '#00FFFF',
     ...Platform.select({
       ios: {
-        shadowColor: colors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.4,
-        shadowRadius: 12,
+        shadowColor: '#00E5FF',
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.6,
+        shadowRadius: 20,
       },
     }),
   },
@@ -409,10 +452,10 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   primaryButtonLabel: {
-    color: colors.onPrimary,
-    fontSize: 16,
-    fontWeight: '600',
-    letterSpacing: 0.3,
+    color: '#0A0F1E', // Dark text on bright button
+    fontSize: 17,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
   secondaryActionsRow: {
     flexDirection: 'row',
@@ -420,60 +463,76 @@ const styles = StyleSheet.create({
   },
   secondaryButton: {
     flex: 1,
-    borderRadius: 12,
-    paddingVertical: 14,
+    borderRadius: 14,
+    paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
-    borderWidth: 1.5,
-    borderColor: colors.border,
+    backgroundColor: 'rgba(0, 229, 255, 0.1)',
+    borderWidth: 2,
+    borderColor: 'rgba(0, 229, 255, 0.4)',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#00E5FF',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 12,
+      },
+    }),
   },
   secondaryButtonPressed: {
-    backgroundColor: colors.surfaceHighlight,
-    borderColor: colors.primary,
-    transform: [{ scale: 0.98 }],
+    backgroundColor: 'rgba(0, 229, 255, 0.2)',
+    borderColor: '#00FFFF',
+    transform: [{ scale: 0.97 }],
   },
   secondaryButtonLabel: {
-    color: colors.textSecondary,
-    fontSize: 14,
-    fontWeight: '500',
-    letterSpacing: 0.2,
+    color: '#00FFFF',
+    fontSize: 15,
+    fontWeight: '600',
+    letterSpacing: 0.3,
   },
   tertiaryButton: {
     flex: 1,
-    borderRadius: 12,
-    paddingVertical: 14,
+    borderRadius: 14,
+    paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
-    borderWidth: 1.5,
-    borderColor: colors.border,
+    backgroundColor: 'rgba(0, 229, 255, 0.1)',
+    borderWidth: 2,
+    borderColor: 'rgba(0, 229, 255, 0.4)',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#00E5FF',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 12,
+      },
+    }),
   },
   tertiaryButtonPressed: {
-    backgroundColor: colors.surfaceHighlight,
-    borderColor: colors.primary,
-    transform: [{ scale: 0.98 }],
+    backgroundColor: 'rgba(0, 229, 255, 0.2)',
+    borderColor: '#00FFFF',
+    transform: [{ scale: 0.97 }],
   },
   tertiaryButtonLabel: {
-    color: colors.textSecondary,
-    fontSize: 14,
-    fontWeight: '500',
-    letterSpacing: 0.2,
+    color: '#00FFFF',
+    fontSize: 15,
+    fontWeight: '600',
+    letterSpacing: 0.3,
   },
   particle: {
     position: 'absolute',
-    width: 4,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: colors.primary,
+    width: 5,
+    height: 5,
+    borderRadius: 2.5,
+    backgroundColor: '#00FFFF', // Brighter particles
     left: '50%',
     top: '50%',
     ...Platform.select({
       ios: {
-        shadowColor: colors.primary,
+        shadowColor: '#00FFFF',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.8,
-        shadowRadius: 4,
+        shadowOpacity: 1,
+        shadowRadius: 6,
       },
     }),
   },

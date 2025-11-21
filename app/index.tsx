@@ -5,7 +5,8 @@ import { WelcomeScreen } from '@/components/welcome-screen/welcome-screen';
 import { colors } from '@/constants/colors';
 
 const REPO_URL = 'https://github.com/k1rta/ios-starter-template';
-const README_URL = 'https://github.com/k1rta/ios-starter-template#readme';
+const DEPLOYMENT_URL =
+  'https://github.com/k1rta/ios-starter-template/blob/main/DEPLOYMENT_GUIDE.md';
 
 const HomeScreen: React.FC = () => {
   const router = useRouter();
@@ -23,17 +24,17 @@ const HomeScreen: React.FC = () => {
     }
   };
 
-  const handleReadme = async () => {
+  const handleDeploymentGuide = async () => {
     try {
-      const supported = await Linking.canOpenURL(README_URL);
+      const supported = await Linking.canOpenURL(DEPLOYMENT_URL);
       if (supported) {
-        await Linking.openURL(README_URL);
+        await Linking.openURL(DEPLOYMENT_URL);
       } else {
-        Alert.alert('Error', `Cannot open URL: ${README_URL}`);
+        Alert.alert('Error', `Cannot open URL: ${DEPLOYMENT_URL}`);
       }
     } catch (error) {
-      console.error('Error opening readme:', error);
-      Alert.alert('Error', 'Failed to open README');
+      console.error('Error opening deployment guide:', error);
+      Alert.alert('Error', 'Failed to open Deployment Guide');
     }
   };
 
@@ -49,8 +50,8 @@ const HomeScreen: React.FC = () => {
         description="A modern, production-ready template to kickstart your next iOS app. Built with best practices and ready to ship."
         primaryActionLabel="View Repository"
         onPrimaryActionPress={handleGetStarted}
-        secondaryActionLabel="Read Docs"
-        onSecondaryActionPress={handleReadme}
+        secondaryActionLabel="Deploy Guide"
+        onSecondaryActionPress={handleDeploymentGuide}
         tertiaryActionLabel="Repo Stats"
         onTertiaryActionPress={handleStats}
       />
